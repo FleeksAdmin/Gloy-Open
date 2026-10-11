@@ -11,6 +11,10 @@
   <a href="https://t.me/gloy_dev">
     <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-blue?style=for-the-badge&logo=telegram&color=229ED9" alt="Join Telegram" />
   </a>
+  &nbsp;
+  <a href="https://t.me/bi_stan">
+    <img src="https://img.shields.io/badge/⚡%20Rent%20GPU%20Compute-@bi__stan-purple?style=for-the-badge&logo=nvidia&logoColor=white&color=76B900" alt="Rent GPU Compute" />
+  </a>
 </p>
 
 > 📢 **Stay updated & support the project!**  
@@ -162,10 +166,20 @@ Gloy Open executes self-generated code and conducts automated web lookups. In pr
 
 ## ⚡ Hardware & GPU Compute
 
-Need dedicated GPU capacity to run Gloy Open, vLLM, or Unsloth fine-tuning at high performance?
+Looking for reliable, cost-effective GPU compute to run **Gloy Open**, large **vLLM** workloads, or high-throughput **Unsloth/LoRA** fine-tuning?
 
-High-grade GPUs (RTX 3090, 4090, 5090, A100) are available at cost-efficient rates below standard cloud marketplaces (Vast.ai, RunPod).  
-For availability and direct compute rental, reach out on Telegram: **[@bi_stan](https://t.me/bi_stan)**
+We offer dedicated, high-performance GPU instances at **significantly below-market pricing** compared to mainstream cloud platforms (Vast.ai, RunPod), backed by flexible conditions and personal support.
+
+### Available Accelerators:
+- 🟢 **NVIDIA GeForce RTX 5090** (32 GB) & **RTX 5090 Laptop** (24 GB)
+- 🟢 **NVIDIA GeForce RTX 4090** (24 GB)
+- 🟢 **NVIDIA GeForce RTX 3090** (24 GB)
+- 🟢 **NVIDIA RTX A5000** (24 GB)
+- 🟢 **NVIDIA GeForce RTX 5070**
+- *...and other tailored multi-GPU configurations upon request.*
+
+💬 **To check current node availability, get customized pricing, or reserve compute:**  
+Contact directly on Telegram: **[@bi_stan](https://t.me/bi_stan)**
 
 ---
 
