@@ -25,6 +25,44 @@
 
 ---
 
+## 🔬 How It Works & Core Principles
+
+Most systems treat LLMs as static black boxes. **Gloy Open** treats the base model as an active cognitive kernel operating inside a closed feedback and self-evolution loop:
+
+1. **Dual-Phase Cognitive Separation (DeepThink)**:
+   - When given a complex prompt, the agent does not immediately generate the public answer.
+   - It first triggers a private, unconstrained scratchpad pass (`<secret>` / native `<think>`), generating hypotheses, exploring contradictions, and testing logical forks.
+   - Only after this internal draft is complete does the agent synthesize a clean, structured step-by-step reasoning trace (`<thinking>`) and the definitive solution (`<answer>`).
+
+2. **Programmatic Self-Critique & Verification**:
+   - Every solution is audited at zero temperature ($T=0$) by an objective judge.
+   - The judge decomposes the output into verifiable claims, scores factual accuracy, and applies strict penalties for ungrounded assertions or vague hand-waving.
+   - If the score falls below threshold ($<0.75$), the agent automatically enters a critique-and-retry loop (up to 2 iterations).
+
+3. **Continuous Background Self-Study (24/7 Learner)**:
+   - When no user requests are incoming, the agent does not sit idle.
+   - It continuously drains a task queue, rotates through a multi-domain curriculum (algorithms, math, system architecture, physics), formulates hypotheses, executes sandboxed code experiments, and searches open technical archives (Wikipedia, arXiv, GitHub, Stack Exchange).
+   - High-quality, verified facts and problem-solution pairs are consolidated into FAISS vector memory.
+
+4. **Autonomous LoRA Factory with A/B Verification & Rollback**:
+   - **The Challenge**: Autonomous weight adaptation risks catastrophic forgetting or model degradation.
+   - **Our Solution**:
+     - Once at least 10 high-scoring problem solutions are collected, the agent triggers an automated fine-tuning cycle (via Unsloth / PEFT).
+     - **Pre-Training Baseline**: Before applying new adapter weights, baseline accuracy is measured across a suite of calibration problems and held-out probes (`scripts/agi_probe.py`).
+     - **Post-Training A/B Verification**: The candidate LoRA adapter is tested against the baseline.
+     - **Automatic Rollback**: If performance drops (average delta $\le -0.05$ or any single task degradation $> 0.20$), the adapter is **instantly rejected and rolled back**, and the incident is logged to anomaly records (`anomalies.jsonl`). Only adapters that improve or preserve capabilities are committed.
+   - *(Continuous enhancement)*: We are actively expanding this safety gate to include multi-turn conversational regression tests and wider domain hold-outs.
+
+---
+
+## 💡 Why Is This Useful?
+
+- **Zero Human-in-the-Loop Maintenance**: The system autonomously refines its reasoning capabilities overnight without needing data scientists to curate datasets or trigger manual training pipelines.
+- **Auditable & Safe Reasoning**: Full separation of thoughts, transparent judge logs, and held-out probe verification prevent the agent from silently degrading or drifting into hallucinations.
+- **Enterprise & Local-First**: Runs entirely on self-hosted infrastructure via vLLM with no dependency on proprietary external LLM providers.
+
+---
+
 ## ✨ Key Features
 
 - 🧠 **Dual-Phase DeepThink**:
@@ -37,7 +75,7 @@
   Queries Wikipedia, arXiv, GitHub, Stack Exchange, and web search engines with automated reliability classification (Official > Authoritative > Community > Forum) and consensus verification before inserting into FAISS/numpy memory.
 - 🧪 **Sandboxed Code Execution**:
   Validates code solutions by running them in isolated sub-processes with CPU/RAM/process limits and execution timeouts.
-- 🧬 **Autonomous LoRA Factory**:
+- 🧬 **Autonomous LoRA Factory with Rollback**:
   Gathers high-quality successful traces, frees VRAM during idle cycles, trains LoRA adapters (via Unsloth/PEFT), runs A/B benchmark evaluation, and commits or rolls back weights automatically.
 - 📊 **Held-Out AGI Probe Benchmarks**:
   Zero-leakage test suite (`scripts/agi_probe.py`) evaluating non-memorized reasoning, abduction, intuitive physics, Theory of Mind, and logic with a strict `grew / flat / forgot` verdict to safeguard against catastrophic forgetting.
