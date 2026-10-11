@@ -13,6 +13,10 @@
   </a>
 </p>
 
+> 📢 **Stay updated & support the project!**  
+> • Join our official Telegram channel **[@gloy_dev](https://t.me/gloy_dev)** for updates, beta tests, and the upcoming Gloy Code release.  
+> • If you find this project exciting, please give us a **⭐ Star** on GitHub!
+
 **Gloy Open** is an open-source agentic architecture built on top of high-performance open-weight LLMs (defaulting to `nvidia/Qwen3.6-35B-A3B-NVFP4` or `Qwen/Qwen3-32B` via vLLM). It wraps foundational models in a closed-loop self-refinement cycle: deep multi-step thinking, strict programmatic judging, anomaly detection, open-source research consensus, sandboxed code execution, and 24/7 background self-training via Auto-LoRA.
 
 ---
@@ -153,6 +157,15 @@ python continuous_learner.py --cycles 0 --tick 2.5
 ## 🔒 Safety & Responsible Use
 
 Gloy Open executes self-generated code and conducts automated web lookups. In production environments, sandbox limits (`resource.RLIMIT_AS`, `RLIMIT_CPU`, timeout restrictions) should be enforced strictly.
+
+---
+
+## ⚡ Hardware & GPU Compute
+
+Need dedicated GPU capacity to run Gloy Open, vLLM, or Unsloth fine-tuning at high performance?
+
+High-grade GPUs (RTX 3090, 4090, 5090, A100) are available at cost-efficient rates below standard cloud marketplaces (Vast.ai, RunPod).  
+For availability and direct compute rental, reach out on Telegram: **[@bi_stan](https://t.me/bi_stan)**
 
 ---
 
