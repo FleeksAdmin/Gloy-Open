@@ -7,15 +7,8 @@
 [![Engine: vLLM](https://img.shields.io/badge/Engine-vLLM-green.svg)](https://github.com/vllm-project/vllm)
 [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/gloy_dev)
 
-<p align="left">
-  <a href="https://t.me/gloy_dev">
-    <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-229ED9?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram" />
-  </a>
-  &nbsp;
-  <a href="https://t.me/bi_stan">
-    <img src="https://img.shields.io/badge/Rent%20GPU%20Compute-@bi__stan-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="Rent GPU Compute" />
-  </a>
-</p>
+[![Join Telegram](https://img.shields.io/badge/Join%20Telegram-@gloy__dev-229ED9.svg?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/gloy_dev)
+[![Rent GPU Compute](https://img.shields.io/badge/Rent%20GPU%20Compute-@bi__stan-76B900.svg?style=for-the-badge&logo=nvidia&logoColor=white)](https://t.me/bi_stan)
 
 > 📢 **Stay updated & support the project!**  
 > • Join our official Telegram channel **[@gloy_dev](https://t.me/gloy_dev)** for updates, beta tests, and the upcoming Gloy Code release.  
