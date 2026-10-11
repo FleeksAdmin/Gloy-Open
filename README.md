@@ -2,97 +2,76 @@
 
 > **Autonomous Self-Improving AI Agent Framework with DeepThink Reasoning and 24/7 Continuous Learning.**
 
-[**Join our Telegram Channel**](https://t.me/gloy_dev) • [**Star on GitHub**](https://github.com/FleeksAdmin/Gloy-Open) • [**License: MIT**](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Engine: vLLM](https://img.shields.io/badge/Engine-vLLM-green.svg)](https://github.com/vllm-project/vllm)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/gloy_dev)
+
+<p align="left">
+  <a href="https://t.me/gloy_dev">
+    <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-blue?style=for-the-badge&logo=telegram&color=229ED9" alt="Join Telegram" />
+  </a>
+</p>
+
+**Gloy Open** is an open-source agentic architecture built on top of high-performance open-weight LLMs (defaulting to `nvidia/Qwen3.6-35B-A3B-NVFP4` or `Qwen/Qwen3-32B` via vLLM). It wraps foundational models in a closed-loop self-refinement cycle: deep multi-step thinking, strict programmatic judging, anomaly detection, open-source research consensus, sandboxed code execution, and 24/7 background self-training via Auto-LoRA.
 
 ---
 
-> 📢 **Join our Community!**
-> All latest updates, closed beta tests of new models, architecture discussions, and the upcoming **Gloy Code** release are announced first in our Telegram channel: **[t.me/gloy_dev](https://t.me/gloy_dev)**.
->
-> 🌟 **If you find this project interesting, please consider giving it a Star on GitHub!** It really helps open-source development.
+## ✨ Key Features
+
+- 🧠 **Dual-Phase DeepThink**:
+  Separates internal raw scratchpad reasoning (`<secret>` / native `<think>`) from structured user-facing step-by-step thinking (`<thinking>`) and final answers (`<answer>`). Configurable effort levels (low to max).
+- 🔄 **24/7 Continuous Learner**:
+  Autonomous background self-study loop when user traffic is idle. Decomposes tasks, explores curriculum problems, verifies facts, and commits verified discoveries to memory.
+- 🎯 **Fail-Gated Programmatic Evaluator (T=0)**:
+  Answers are broken down into atomic claims and judged strictly against factuality thresholds. Penalizes hallucinations, missing ambiguity warnings, and empty analogies. Retries with critique prompts if scores fall below threshold.
+- 🌐 **Multi-Source Autonomous Research & RAG**:
+  Queries Wikipedia, arXiv, GitHub, Stack Exchange, and web search engines with automated reliability classification (Official > Authoritative > Community > Forum) and consensus verification before inserting into FAISS/numpy memory.
+- 🧪 **Sandboxed Code Execution**:
+  Validates code solutions by running them in isolated sub-processes with CPU/RAM/process limits and execution timeouts.
+- 🧬 **Autonomous LoRA Factory**:
+  Gathers high-quality successful traces, frees VRAM during idle cycles, trains LoRA adapters (via Unsloth/PEFT), runs A/B benchmark evaluation, and commits or rolls back weights automatically.
+- 📊 **Held-Out AGI Probe Benchmarks**:
+  Zero-leakage test suite (`scripts/agi_probe.py`) evaluating non-memorized reasoning, abduction, intuitive physics, Theory of Mind, and logic with a strict `grew / flat / forgot` verdict to safeguard against catastrophic forgetting.
+- 🖥️ **Command Center Dashboard**:
+  FastAPI + modern responsive Web UI featuring real-time SSE streaming, latency & token stats, score history charts, and live task queues.
 
 ---
 
-## ⚡ What is Gloy Open?
-
-Most modern "AI agents" are thin wrappers around proprietary commercial APIs. They do not learn from their own mistakes, cannot independently verify facts, and discard all accumulated experience once the prompt session ends.
-
-**Gloy Open** takes a radically different approach. It is a full closed-loop, **autonomous agentic framework** built on top of high-performance open-weight LLMs (defaulting to `nvidia/Qwen3.6-35B-A3B-NVFP4` or `Qwen/Qwen3-32B` powered by **vLLM**).
-
-The agent pairs deep test-time reasoning (*DeepThink*), strict programmatic fact-checking with zero-temperature judging (T=0), sandboxed code execution, and **24/7 background self-training via autonomous LoRA weight adaptation (Auto-LoRA)** without human intervention.
-
----
-
-## 🎯 Why Gloy Open?
-
-| Feature | Standard AI Agents / GPT Wrappers | Gloy Open 🍇 |
-|---|---|---|
-| **Reasoning Architecture** | Single-pass prompt or shallow ReAct | **Dual-Phase DeepThink**: private scratchpad (`<secret>`) ➔ structured public reasoning (`<thinking>`) |
-| **Learning & Adaptation** | Static weights, prompt context only | **Autonomous 24/7 LoRA Loop**: collects verified successes and bakes patterns into weights |
-| **Quality Control (Judge)** | None or uncalibrated self-critique | **Programmatic Judge (T=0)**: claim extraction, penalty gating for hallucinations, auto-retry loop |
-| **Research & Fact-Checking**| Naive search engine queries | Multi-source retrieval (Wikipedia, arXiv, GitHub, DDG) with **source credibility scoring** |
-| **Code Execution** | Unchecked or unconstrained | **Guarded Sandbox**: strict CPU/RAM/process limits, timeouts, assert testing |
-| **Knowledge Preservation** | Uncontrolled drift | **Held-Out AGI Probes**: 8 non-leaked tasks ensuring zero catastrophic forgetting |
-
----
-
-## 🚀 Performance & Speed
-
-- **High-Throughput vLLM Engine**: Leveraging MoE architectures (`Qwen3.6-35B-A3B-NVFP4` activates ~3B parameters per token) with FP8 KV cache delivers Time-To-First-Token (TTFT) around **80–150 ms** and sustained generation speeds of **40–80+ tokens/sec** on a single GPU (RTX 3090 / 4090 / 5090).
-- **Instant Preemption for User Requests**: When an interactive user query arrives, the background self-learning daemon pauses immediately (`pause.flag`), releasing 100% of compute and VRAM to the user.
-- **Asynchronous Token Streaming**: Full Server-Sent Events (SSE) support with stage decomposition (`temp_start` ➔ `tokens` ➔ `generated` ➔ `done`) in the web dashboard.
-
----
-
-## 🧠 Architecture Lifecycle
+## 🏗️ Architecture Overview
 
 ```text
-[ User Prompt / Curriculum Task ]
-                │
-                ▼
-┌─────────────────────────────────────────────────────────────┐
-│  1. DeepThink Reasoning Engine                              │
-│     ├─ Private native scratchpad: <secret> / <think>        │
-│     └─ Clean user-facing trace: <thinking>                  │
-└─────────────────────────────┬───────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  2. Autonomous Research & Sandbox (if required)             │
-│     ├─ Open Sources (arXiv, GitHub, Wikipedia, DDG)         │
-│     ├─ Source Reliability Classifier (authority weighting)  │
-│     └─ Sandboxed Code Execution (isolated test runner)      │
-└─────────────────────────────┬───────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  3. Programmatic Evaluator (Judge, T=0)                     │
-│     ├─ Atomic claim extraction                              │
-│     ├─ Factuality verification against ground-truth/context │
-│     └─ Penalties: unwarned hallucination, empty analogies   │
-└─────────────┬───────────────────────────────┬───────────────┘
-              │                               │
-      Score >= 0.90                   Score < 0.75
-              │                               │
-              ▼                               ▼
-      [ Deliver Output ]              [ Critique Prompt ]
-      [ Store to FAISS KB ]           [ Auto-Retry Attempt ]
-              │
-              ▼ (when 10+ traces collected)
-┌─────────────────────────────────────────────────────────────┐
-│  4. Background Auto-LoRA Factory (24/7 Learner)             │
-│     ├─ Suspend vLLM & free VRAM                             │
-│     ├─ Train LoRA adapter via Unsloth / PEFT                │
-│     ├─ A/B benchmark evaluation against held-out prompts    │
-│     └─ Commit adapter or trigger automatic rollback         │
-└─────────────────────────────────────────────────────────────┘
+[ User / Queue ]
+       │
+       ▼
+[ Orchestrator & DeepThink ] ───► [ Secret Scratchpad (<think>) ]
+       │                                     │
+       ▼                                     ▼
+[ Anomaly Detector ]              [ Public Reasoning (<thinking>) ]
+       │                                     │
+       ▼                                     ▼
+[ Evaluator / Judge (T=0) ] ◄──── [ Sandboxed Verification / Web RAG ]
+       │
+       ├─ Score >= 0.90 ──────────► [ Output to User & Memory ]
+       ├─ 0.75 <= Score < 0.90 ───► [ Queued for Training ]
+       └─ Score < 0.75 ───────────► [ Critique & Auto-Retry Loop ]
+                                             │
+                                    (Background 24/7)
+                                             ▼
+                                  [ Auto-LoRA Fine-Tuning ]
 ```
 
 ---
 
-## 💻 Quick Start & Setup
+## 🚀 Quick Start
 
-### 1. Clone Repository
+### 1. Requirements
+
+- Linux or Windows (WSL2 recommended for vLLM)
+- Python 3.10+
+- NVIDIA GPU with 16GB+ VRAM (for local vLLM 32B/35B quant models) or access to an OpenAI-compatible endpoint.
+
+### 2. Installation
 
 ```bash
 git clone https://github.com/FleeksAdmin/Gloy-Open.git
@@ -100,7 +79,9 @@ cd Gloy-Open
 pip install -r requirements.txt
 ```
 
-### 2. Launch Local vLLM Inference Server
+### 3. Launching vLLM Engine
+
+Start an OpenAI-compatible vLLM inference server:
 
 ```bash
 python -m vllm.entrypoints.openai.api_server \
@@ -111,80 +92,70 @@ python -m vllm.entrypoints.openai.api_server \
   --port 8000
 ```
 
-*(You can point to any existing OpenAI-compatible endpoint using `export GLOW_ENDPOINT="http://localhost:8000/v1/chat/completions"`).*
+### 4. Running the Agent Pipeline
 
-### 3. Launch Command Center Dashboard
-
-```bash
-cd scripts
-python dashboard.py --port 8010
-```
-Open **`http://localhost:8010`** in your browser to access the real-time telemetry, queue inspector, and inference workspace.
-
-### 4. Single-Prompt Orchestrator Test
+Test a single prompt through the self-checking orchestrator:
 
 ```bash
 cd scripts
 python orchestrator.py "Explain the difference between a semaphore and a mutex."
 ```
 
-*Offline mode (no GPU required):*
+Offline/Mock mode (without GPU):
 ```bash
-python orchestrator.py --mock "Offline pipeline verification"
+python orchestrator.py --mock "Test reasoning"
 ```
 
-### 5. Start Autonomous 24/7 Learning Daemon
+### 5. Launch the Command Center Dashboard
 
 ```bash
-cd scripts
+python dashboard.py --port 8010
+```
+Open `http://localhost:8010` in your browser.
+
+### 6. Start the 24/7 Continuous Learner
+
+```bash
 python continuous_learner.py --cycles 0 --tick 2.5
 ```
 
 ---
 
-## 📂 Repository Structure
+## 📁 Repository Structure
 
 ```text
-├── LICENSE                      # MIT License
-├── README.md                    # Project documentation
-├── requirements.txt             # Python dependencies
-├── .gitignore                   # Ignore rules for logs and model checkpoints
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── .gitignore
 ├── vault/
-│   └── identity.json            # Agent persistent identity & metadata
-├── logs/                        # Training queues and runtime buffers
+│   └── identity.json           # Agent persistent identity & metadata
+├── logs/                       # Training logs, trajectories, and datasets
 └── scripts/
-    ├── orchestrator.py          # Core pipeline, stream anomaly detection & judge
-    ├── continuous_learner.py    # 24/7 autonomous self-study daemon
-    ├── deepthink.py             # Dual-phase secret scratchpad & public trace
-    ├── cognition.py             # Cognitive checklists (physics, ToM, planning)
-    ├── open_sources.py          # Multi-platform research retriever
-    ├── source_reliability.py    # Source credibility classifier
-    ├── research_agent.py        # Consensus-driven research agent
-    ├── hard_verify.py           # Sandboxed code execution validator
-    ├── train_lora.py            # Auto-LoRA fine-tuning and A/B verification
-    ├── agi_probe.py             # 8 held-out progress probe benchmarks
-    ├── grow.py                  # Growth vs forgetting evaluation
-    ├── solved_bench.py          # Coding benchmark suite (23 tasks)
-    ├── dashboard.py             # FastAPI dashboard backend
-    └── dashboard.html           # Command center Web UI
+    ├── orchestrator.py         # Main execution pipeline, judge & retry engine
+    ├── continuous_learner.py   # 24/7 autonomous learning daemon
+    ├── deepthink.py            # Dual-phase secret & public chain-of-thought
+    ├── cognition.py            # Cognitive evaluation checklists (physics, ToM, etc.)
+    ├── open_sources.py         # Multi-platform research retriever
+    ├── source_reliability.py   # Source credibility classifier
+    ├── research_agent.py       # Consensus-driven research agent
+    ├── hard_verify.py          # Sandboxed code execution validator
+    ├── train_lora.py           # Auto-LoRA fine-tuning and A/B verification
+    ├── agi_probe.py            # Held-out progress probe suite
+    ├── grow.py                 # Growth vs Forget evaluation pipeline
+    ├── solved_bench.py         # Coding benchmark suite
+    ├── dashboard.py            # FastAPI dashboard server
+    └── dashboard.html          # Interactive control center UI
 ```
 
 ---
 
-## 🗺️ Roadmap
+## 🔒 Safety & Responsible Use
 
-- [x] Autonomous agentic orchestration & dual-phase DeepThink
-- [x] Strict programmatic evaluator (Judge T=0) with critique retries
-- [x] vLLM integration and 24/7 background learning loop
-- [x] Multi-source research & RAG with credibility weighting
-- [ ] **Gloy Code**: Dedicated agentic CLI environment for software engineering
-- [ ] Hosted API access with expanded foundation models
-- [ ] Multimodal reasoning support (diagrams and system architecture analysis)
+Gloy Open executes self-generated code and conducts automated web lookups. In production environments, sandbox limits (`resource.RLIMIT_AS`, `RLIMIT_CPU`, timeout restrictions) should be enforced strictly.
 
 ---
 
-## 💜 Community & Support
+## 📄 License
 
-- 💬 **Telegram:** [t.me/gloy_dev](https://t.me/gloy_dev)
-- 🐛 **Issues & Feedback:** Submit an [Issue](https://github.com/FleeksAdmin/Gloy-Open/issues) or Pull Request!
-- ⭐ **Don't forget to star the repository if you enjoy our work!**
+This project is open-source under the [MIT License](LICENSE).
