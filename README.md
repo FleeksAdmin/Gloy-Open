@@ -5,6 +5,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Engine: vLLM](https://img.shields.io/badge/Engine-vLLM-green.svg)](https://github.com/vllm-project/vllm)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/gloy_dev)
+
+<p align="left">
+  <a href="https://t.me/gloy_dev">
+    <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-blue?style=for-the-badge&logo=telegram&color=229ED9" alt="Join Telegram" />
+  </a>
+</p>
 
 **Gloy Open** is an open-source agentic architecture built on top of high-performance open-weight LLMs (defaulting to `nvidia/Qwen3.6-35B-A3B-NVFP4` or `Qwen/Qwen3-32B` via vLLM). It wraps foundational models in a closed-loop self-refinement cycle: deep multi-step thinking, strict programmatic judging, anomaly detection, open-source research consensus, sandboxed code execution, and 24/7 background self-training via Auto-LoRA.
 
