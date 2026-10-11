@@ -9,11 +9,11 @@
 
 <p align="left">
   <a href="https://t.me/gloy_dev">
-    <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-blue?style=for-the-badge&logo=telegram&color=229ED9" alt="Join Telegram" />
+    <img src="https://img.shields.io/badge/Join%20Telegram-@gloy__dev-229ED9?style=for-the-badge&logo=telegram&logoColor=white" alt="Join Telegram" />
   </a>
   &nbsp;
   <a href="https://t.me/bi_stan">
-    <img src="https://img.shields.io/badge/⚡%20Rent%20GPU%20Compute-@bi__stan-purple?style=for-the-badge&logo=nvidia&logoColor=white&color=76B900" alt="Rent GPU Compute" />
+    <img src="https://img.shields.io/badge/Rent%20GPU%20Compute-@bi__stan-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="Rent GPU Compute" />
   </a>
 </p>
 
