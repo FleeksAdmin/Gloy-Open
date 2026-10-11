@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Logs & Runtime State
+logs/
+!logs/
+logs/*
+!logs/.gitkeep
+!logs/continuous/
+logs/continuous/*
+!logs/continuous/.gitkeep
+
+# Models & Adapters
+models/*
+!models/.gitkeep
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
