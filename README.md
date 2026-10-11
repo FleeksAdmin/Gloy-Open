@@ -2,11 +2,11 @@
 
 > **Autonomous Self-Improving AI Agent Framework with DeepThink Reasoning and 24/7 Continuous Learning.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Engine: vLLM](https://img.shields.io/badge/Engine-vLLM-green.svg)](https://github.com/vllm-project/vllm)
-[![Telegram: @gloy_dev](https://img.shields.io/badge/Telegram-@gloy__dev-2CA5E0?logo=telegram&logoColor=white)](https://t.me/gloy_dev)
-[![Rent GPU: @bi_stan](https://img.shields.io/badge/Rent%20GPU-@bi__stan-76B900?logo=nvidia&logoColor=white)](https://t.me/bi_stan)
+[![License: MIT](assets/badge-license.svg)](LICENSE)
+[![Python 3.10+](assets/badge-python.svg)](https://www.python.org/downloads/)
+[![Engine: vLLM](assets/badge-vllm.svg)](https://github.com/vllm-project/vllm)
+[![Telegram: @gloy_dev](assets/badge-telegram.svg)](https://t.me/gloy_dev)
+[![Rent GPU: @bi_stan](assets/badge-gpu.svg)](https://t.me/bi_stan)
 
 > 📢 **Stay updated & support the project!**  
 > • Join our official Telegram channel **[@gloy_dev](https://t.me/gloy_dev)** for updates, beta tests, and the upcoming Gloy Code release.  
